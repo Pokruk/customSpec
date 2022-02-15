@@ -1,0 +1,16 @@
+name: customSpec
+main: customSpec.main.customSpec
+version: 1.0
+commands:
+   customSpec:
+      description: switch gamemode and save coords
+      usage: /customSpec
+      aliases: cs 
+   customSpecOff:
+      description: Turn off possibility to use customSpec command
+      usage: /customSpecOff
+      aliases: csoff
+   customSpecOn:
+      description: Turn on possibility to use customSpec command
+      usage: /customSpecOn
+      aliases: cson
