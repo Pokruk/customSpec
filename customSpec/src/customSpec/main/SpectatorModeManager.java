@@ -18,7 +18,7 @@ public class SpectatorModeManager implements Listener {
 	}
 	
 	public SpectatorMode createIfNotExist(Player player) {
-		SpectatorMode spectator = this.spectators.get(player.getName());
+		SpectatorMode spectator = getSpectatorModeFor(player);
 		if (spectator == null) {
 			spectator = new SpectatorMode(player);
 			this.spectators.put(player.getName(), spectator);
