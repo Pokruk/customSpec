@@ -12,36 +12,18 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class customSpec extends JavaPlugin implements CommandExecutor, Listener {
+public class customSpec extends JavaPlugin implements CommandExecutor {
 	boolean customSpecEnabled = true;
 
-	SpectatorModeManager spectatorsManager = new SpectatorModeManager();
+	SpectatorModeManagerListener spectatorsManager = new SpectatorModeManagerListener();
 
 	public void onEnable() {
 		getCommand("customSpec").setExecutor(this);
-		getServer().getPluginManager().registerEvents(this, (Plugin) this);
+		getServer().getPluginManager().registerEvents(spectatorsManager, this);
 	}
 
 	public void onDisable() {
 		this.spectatorsManager.disableAll();
-	}
-
-	@EventHandler
-	public void onPlayerQuitEvent(PlayerQuitEvent e) {
-		Bukkit.getLogger().info("PlayerQUIT");
-		SpectatorMode specMode = this.spectatorsManager.getSpectatorModeFor(e.getPlayer());
-		if (specMode.isEnabled())
-			specMode.disable();
-		this.spectatorsManager.remove(e.getPlayer());
-	}
-
-	@EventHandler
-	public void onPlayerKickEvent(PlayerKickEvent e) {
-		Bukkit.getLogger().info("PlayerQUIT");
-		SpectatorMode specMode = this.spectatorsManager.getSpectatorModeFor(e.getPlayer());
-		if (specMode.isEnabled())
-			specMode.disable();
-		this.spectatorsManager.remove(e.getPlayer());
 	}
 
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
@@ -54,7 +36,7 @@ public class customSpec extends JavaPlugin implements CommandExecutor, Listener 
 				sender.sendMessage("This command allowed only for players");
 				return true;
 			}
-			SpectatorMode spectator = this.spectatorsManager.getSpectatorModeFor((Player) sender);
+			SpectatorMode spectator = this.spectatorsManager.createIfNotExist((Player) sender);
 			spectator.toggle();
 			return true;
 		}

@@ -2,12 +2,22 @@ package customSpec.main;
 
 import java.util.Collection;
 import java.util.HashMap;
-import org.bukkit.entity.Player;
 
-public class SpectatorModeManager {
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerKickEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
+
+public class SpectatorModeManager implements Listener {
 	private HashMap<String, SpectatorMode> spectators = new HashMap<>();
 
 	public SpectatorMode getSpectatorModeFor(Player player) {
+		return this.spectators.get(player.getName());
+	}
+	
+	public SpectatorMode createIfNotExist(Player player) {
 		SpectatorMode spectator = this.spectators.get(player.getName());
 		if (spectator == null) {
 			spectator = new SpectatorMode(player);
