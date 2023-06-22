@@ -6,9 +6,7 @@ import org.bukkit.entity.Player;
 
 public class SpectatorMode {
 	private boolean enabled = false;
-
 	private Location location;
-
 	private GameMode initialGamemode;
 
 	public Player player;

@@ -5,12 +5,20 @@ commands:
    customSpec:
       description: switch gamemode and save coords
       usage: /customSpec
-      aliases: cs 
+      aliases: cs
+      permission: customspec.switchself
    customSpecOff:
       description: Turn off possibility to use customSpec command
       usage: /customSpecOff
       aliases: csoff
+      permission: customspec.switchall
    customSpecOn:
       description: Turn on possibility to use customSpec command
       usage: /customSpecOn
       aliases: cson
+      permission: customspec.switchall
+permissions:
+   customspec.switchself:
+      default: true
+   customspec.switchall:
+      default: op

@@ -28,6 +28,7 @@ public class customSpec extends JavaPlugin implements CommandExecutor {
 
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if (label.equals("customspec") || label.equals("cs")) {
+			if (!sender.hasPermission("customspec.switchself")) return false;
 			if (!this.customSpecEnabled) {
 				sender.sendMessage("This command is off now");
 				return true;
@@ -41,8 +42,8 @@ public class customSpec extends JavaPlugin implements CommandExecutor {
 			return true;
 		}
 		if (label.equals("customspecoff") || label.equals("csoff")) {
-			if (!sender.hasPermission("op")) {
-				sender.sendMessage("You must have op to use that");
+			if (!sender.hasPermission("customspec.switchall")) {
+				sender.sendMessage("You must have customspec.switchall to use that");
 				return true;
 			}
 			this.spectatorsManager.disableAll();

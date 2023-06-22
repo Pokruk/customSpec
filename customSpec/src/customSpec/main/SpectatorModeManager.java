@@ -17,6 +17,11 @@ public class SpectatorModeManager implements Listener {
 		return this.spectators.get(player.getName());
 	}
 	
+	/**
+	 * 
+	 * @param player
+	 * @return spectator object, even if it is not exist yet
+	 */
 	public SpectatorMode createIfNotExist(Player player) {
 		SpectatorMode spectator = getSpectatorModeFor(player);
 		if (spectator == null) {
